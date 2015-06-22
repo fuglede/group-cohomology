@@ -1,0 +1,210 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      7519,        201]
+NotebookOptionsPosition[      7068,        181]
+NotebookOutlinePosition[      7406,        196]
+CellTagsIndexPosition[      7363,        193]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Get", " ", "the", " ", "main", " ", "library"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Import", "[", "\"\<calculateGroupCohomology.m\>\"", "]"}], 
+    ";"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.643976602861014*^9, 3.643976705308158*^9}, {
+  3.643976860811366*^9, 3.643976889346582*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Let", " ", "us", " ", "define", " ", "an", " ", "SU", 
+     RowBox[{"(", "2", ")"}]}], "-", 
+    RowBox[{
+    "representation", " ", "of", " ", "the", " ", "fundamental", 
+     "\[IndentingNewLine]", "group", " ", "of", " ", "a", " ", "closed", " ", 
+     "torus"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"g", " ", "=", " ", "1"}], ";"}], " ", 
+   RowBox[{"(*", " ", "genus", " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", " ", "=", " ", "0"}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"number", " ", "of", " ", "punctures"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"idmat", " ", "=", " ", 
+     RowBox[{"IdentityMatrix", "[", "2", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"imat", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Exp", "[", 
+          RowBox[{"Pi", "*", 
+           RowBox[{"I", "/", "4"}]}], "]"}], ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"Exp", "[", 
+          RowBox[{
+           RowBox[{"-", "Pi"}], "*", 
+           RowBox[{"I", "/", "4"}]}], "]"}]}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rep", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"idmat", ",", " ", "imat"}], "}"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"the", " ", "representation"}], ",", " ", 
+     RowBox[{
+     "given", " ", "by", " ", "its", " ", "value", " ", "on", " ", "the", " ",
+       "2", "g", " ", "standard", " ", "generators"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Let", " ", "us", " ", "evaluate", " ", "the", " ", "dimension", " ", 
+     "of", " ", "H\.b9", " ", "at", " ", "this", " ", "point"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"findDimH1", "[", 
+    RowBox[{"g", ",", " ", "n", ",", " ", "rep"}], "]"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"returns", " ", "2"}], ",", " ", 
+     RowBox[{
+     "the", " ", "dimension", " ", "of", " ", "the", " ", "moduli", " ", 
+      "space"}]}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Next", " ", "up"}], ",", " ", 
+     RowBox[{
+     "let", " ", "us", " ", "find", " ", "the", " ", "number", " ", "of", " ",
+       "fixed", " ", "directions", " ", "by", " ", "the", " ", "action", " ", 
+      "on", "\[IndentingNewLine]", "the", " ", "moduli", " ", "space", " ", 
+      "induced", " ", "by", " ", "the", " ", "action", " ", "on", " ", "the", 
+      " ", "fundamental", " ", "group", " ", "induced", "\[IndentingNewLine]",
+       "by", " ", "the", " ", "action", " ", "of", " ", "a", " ", "third", 
+      " ", "power", " ", "of", " ", "a", " ", "Dehn", " ", "twist", " ", "on",
+       " ", "the", " ", "torus"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"homeo", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Take", " ", "the", " ", "third", " ", "power", " ", "of", " ", "the", 
+     " ", "first", " ", "Dehn", " ", "twist", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+       "see", " ", "the", " ", "package", " ", "for", " ", "the", " ", 
+        "labeling"}], ")"}], "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"inducedMap", " ", "=", " ", 
+     RowBox[{"twistsToMap", "[", 
+      RowBox[{"g", ",", "n", ",", "homeo"}], "]"}]}], " ", ";"}], 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Calculate", " ", "the", " ", "action", " ", "on", " ", "the", " ", 
+     "fundamental", " ", "group"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "The", " ", "map", " ", "is", " ", "allowed", " ", "to", " ", "move", " ",
+      "the", " ", "representation", " ", "in", " ", "its", " ", "conjugacy", 
+     "\[IndentingNewLine]", 
+     RowBox[{"class", ".", " ", "We"}], " ", "specify", " ", "explicitly", 
+     " ", "the", " ", "conjugation", " ", "factor", " ", "with", " ", "which",
+      " ", "the", "\[IndentingNewLine]", "representation", " ", "is", " ", 
+     RowBox[{"changed", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"conjugationFactor", " ", "=", " ", 
+     RowBox[{"IdentityMatrix", "[", "2", "]"}]}], " ", ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"fixedDirections", "[", 
+    RowBox[{
+    "g", ",", " ", "n", ",", " ", "rep", ",", " ", "inducedMap", ",", " ", 
+     "conjugationFactor"}], "]"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Returns", " ", "1"}], ",", " ", 
+     RowBox[{
+      RowBox[{"the", " ", "dimension", " ", "of", " ", "the", " ", "1"}], "-", 
+      RowBox[{
+      "eigenspace", " ", "of", " ", "the", " ", "action", " ", "of", " ", 
+       "the", " ", "given", " ", "homeomorphism"}]}]}], " ", "*)"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.643976822536064*^9, 3.6439768591060123`*^9}, {
+  3.64397689160257*^9, 3.643976910050301*^9}, {3.643976961442169*^9, 
+  3.6439770337314568`*^9}, {3.643977095217493*^9, 3.643977139793756*^9}, {
+  3.643977170521851*^9, 3.643977396223488*^9}, {3.643977451529174*^9, 
+  3.643977479263719*^9}, {3.643977525191036*^9, 3.6439776196941137`*^9}, {
+  3.643977652050251*^9, 3.643977671853647*^9}}],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{{3.6439771294938383`*^9, 3.643977140407401*^9}, 
+   3.643977620744906*^9, 3.643977653456029*^9, 3.643977735849979*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{{3.6439771294938383`*^9, 3.643977140407401*^9}, 
+   3.643977620744906*^9, 3.643977653456029*^9, 3.6439777358951473`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.643977161726893*^9, 3.643977192079413*^9}}]
+},
+WindowSize->{1291, 572},
+WindowMargins->{{Automatic, 259}, {Automatic, 49}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 543, 15, 77, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1125, 39, 5492, 128, 517, "Input"],
+Cell[6620, 169, 166, 2, 32, "Output"],
+Cell[6789, 173, 168, 2, 64, "Output"]
+}, Open  ]],
+Cell[6972, 178, 92, 1, 32, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
